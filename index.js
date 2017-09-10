@@ -36,3 +36,9 @@ function detectmob() {
     return false;
   }
 }
+document.querySelector("#gameid").addEventListener("keydown", (e)=>{
+  if (e.key == "Enter") {
+    window.location.hash = document.querySelector("#gameid").value;
+    window.location.reload();
+  }
+})
