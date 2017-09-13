@@ -2,7 +2,7 @@
 html, body {
   padding: 0;
   margin: 0;
-  background: #F2F4FF;
+  background: #FFF;
   font-family: 'Raleway', sans-serif;
 }
 #landing {
@@ -12,6 +12,7 @@ html, body {
   width: 100%;
   height: 100%;
   background: #FFF;
+  transition: width 10s;
 }
 #logo {
   position: absolute;
