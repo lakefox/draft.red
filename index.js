@@ -4,6 +4,7 @@ document.querySelector("#start").addEventListener("keyup", (e)=>{
     document.querySelector("#start").style.top = "35px";
     document.querySelector("#start").style.left = "135px";
     document.querySelector("#start").setAttribute("readonly","");
+    document.querySelector("#start").setAttribute("class","tab");
     document.querySelector("#portal").style.display = "inherit";
   }
 });
