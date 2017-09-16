@@ -13,16 +13,19 @@
     <div id="landing">
       <img src="./logo.png" id="logo">
     </div>
-    <input type="text" id="start" placeholder="Team Name" spellcheck="false">
+    <input type="text" id="start" placeholder="Team Name" spellcheck="false" data-show="myteam" onclick="tab(this)">
     <div id="portal">
-      <input type="text" id="league" class="tab" value="My League" spellcheck="false" readonly>
-      <input type="text" id="draft" class="tab" value="Draft" spellcheck="false" readonly>
+      <input type="text" id="league" class="tab" value="My League" spellcheck="false" readonly data-show="myleague" onclick="tab(this)">
+      <input type="text" id="draft" class="tab" value="Draft Players" spellcheck="false" readonly data-show="mydraft" onclick="tab(this)">
       <hr id="p-line">
-      <div id="myteam">
-
+      <div id="myteam" class="screen" style="display: inherit;">
+        1
       </div>
-      <div id="myleague">
-
+      <div id="myleague" class="screen">
+        2
+      </div>
+      <div id="mydraft" class="screen">
+        3
       </div>
     </div>
     <script src="./index.js" charset="utf-8"></script>

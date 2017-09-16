@@ -76,3 +76,11 @@ html, body {
   top: 2px;
   left: 538px;
 }
+.screen {
+  display: none;
+  position: absolute;
+  top: 68px;
+  left: 0;
+  width: 100vw;
+  min-height: calc(100vh - 68px);
+}
