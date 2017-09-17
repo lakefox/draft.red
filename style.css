@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Raleway:900,400');
 html, body {
   padding: 0;
   margin: 0;
   background: #FFF;
   font-family: 'Raleway', sans-serif;
+  font-weight: 400;
 }
 #landing {
   position: absolute;
@@ -15,39 +16,36 @@ html, body {
   transition: width 10s;
 }
 #logo {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 50%;
-  min-width: 300px;
-  height: auto;
+  text-align: center;
+  font-size: 5em;
+  margin-top: 10%;
+  font-weight: 900;
 }
 #start {
   position: absolute;
-  top: 70%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   z-index: 2;
   width: 250px;
   height: 50px;
   font-size: 25px;
-  border: 3px solid #FF686B;
-  border-radius: 5px;
+  border: 3px solid #0000FF;
   padding: 5px;
   color: #9F9AA4;
+  outline: none;
 }
 .tab {
   width: 250px;
   height: 50px;
   font-size: 25px;
-  border: 3px solid #FF686B;
-  border-radius: 5px;
+  border: 3px solid #0000FF;
   padding: 5px;
   color: #9F9AA4;
+  outline: none;
 }
 .tab:hover {
-  box-shadow: 0px 0px 7px 0px rgb(150,150,150);
+  box-shadow: 0px 0px 9px 0px rgb(130,130,130);
 }
 #portal {
   position: absolute;
@@ -63,7 +61,7 @@ html, body {
   left: 8px;
   border: none;
   height: 3px;
-  background: #FF686B;
+  background: #0000FF;
   width: calc(100% - 8px);
 }
 #league {

