@@ -18,9 +18,9 @@
     </div>
     <input type="text" id="start" class="tab" placeholder="Team Name" spellcheck="false">
     <div id="tabs">
-      <input type="text" id="name" class="tab" value="" spellcheck="false" readonly data-show="myteam" onclick="tab(this)">
-      <input type="text" id="league" class="tab" value="My League" spellcheck="false" readonly data-show="myleague" onclick="tab(this)">
-      <input type="text" id="draft" class="tab" value="Draft Players" spellcheck="false" readonly data-show="mydraft" onclick="tab(this)">
+      <div id="name" class="tab" data-show="myteam" onclick="tab(this)"></div>
+      <div id="league" class="tab" data-show="myleague" onclick="tab(this)">My League</div>
+      <div id="draft" class="tab" data-show="mydraft" onclick="tab(this)">Draft Players</div>
     </div>
     <div id="portal">
       <div id="myteam" class="screen" style="display: inherit;">

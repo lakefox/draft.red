@@ -3,8 +3,8 @@ if (window.location.search.length > 1) {
   document.querySelector("#landing").style.display = "none";
   document.querySelector("#start").style.display = "none";
   document.querySelector("#portal").style.display = "inherit";
-  document.querySelector("#tabs").style.display = "inline-flex";
-  document.querySelector("#name").value = window.location.search.slice(1);
+  document.querySelector("#tabs").style.display = "-webkit-box";
+  document.querySelector("#name").innerHTML = window.location.search.slice(1);
   named = true;
   if (window.location.origin != "file://") {
     // Add coin hive for points
