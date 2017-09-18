@@ -15,31 +15,34 @@ html, body {
   background: #FFF;
   transition: width 10s;
 }
+#start {
+  position: absolute;
+  z-index: 2;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 #logo {
   text-align: center;
   font-size: 5em;
   margin-top: 10%;
   font-weight: 900;
 }
-#start {
+#tabs {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 2;
-  width: 250px;
-  height: 50px;
-  font-size: 25px;
-  border: 3px solid #0000FF;
-  padding: 5px;
-  color: #9F9AA4;
-  outline: none;
+  top: 3px;
+  left: 3px;
+  overflow-y: hidden;
+  width: calc(100% - 6px);
+  border-bottom: 3px solid #00F;
+  height: 63px;
+  display: none;
 }
 .tab {
   width: 250px;
   height: 50px;
   font-size: 25px;
-  border: 3px solid #0000FF;
+  border: 3px solid #00F;
   padding: 5px;
   color: #9F9AA4;
   outline: none;
@@ -63,16 +66,6 @@ html, body {
   height: 3px;
   background: #0000FF;
   width: calc(100% - 8px);
-}
-#league {
-  position: absolute;
-  top: 2px;
-  left: 270px;
-}
-#draft {
-  position: absolute;
-  top: 2px;
-  left: 538px;
 }
 .screen {
   display: none;

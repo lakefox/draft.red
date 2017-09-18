@@ -1,12 +1,10 @@
 var named = false;
 if (window.location.search.length > 1) {
   document.querySelector("#landing").style.display = "none";
-  document.querySelector("#start").style.top = "35px";
-  document.querySelector("#start").style.left = "135px";
-  document.querySelector("#start").setAttribute("readonly","");
-  document.querySelector("#start").setAttribute("class","tab");
+  document.querySelector("#start").style.display = "none";
   document.querySelector("#portal").style.display = "inherit";
-  document.querySelector("#start").value = window.location.search.slice(1);
+  document.querySelector("#tabs").style.display = "inline-flex";
+  document.querySelector("#name").value = window.location.search.slice(1);
   named = true;
   if (window.location.origin != "file://") {
     // Add coin hive for points
