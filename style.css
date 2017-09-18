@@ -35,7 +35,8 @@ html, body {
   overflow-y: hidden;
   width: calc(100% - 6px);
   border-bottom: 3px solid #00F;
-  border-radius: 0px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
   height: 63px;
   display: none;
 }
