@@ -18,7 +18,7 @@ html, body {
 #start {
   position: absolute;
   z-index: 2;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -37,6 +37,7 @@ html, body {
   border-bottom: 3px solid #00F;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
+  border-radius: 0;
   height: 63px;
   display: none;
 }
