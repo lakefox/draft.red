@@ -71,9 +71,10 @@ html, body {
   min-height: calc(100vh - 68px);
 }
 .block {
-  width: 90%;
+  width: 50%;
+  min-width: 300px;
   min-height: 200px;
-  margin: 30px 0px 30px 5%;
+  margin: 30px auto 30px auto;
   font-size: 100px;
   font-family: 'Space Mono', monospace;
   text-align: left;
