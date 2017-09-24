@@ -79,6 +79,7 @@ html, body {
   font-family: 'Space Mono', monospace;
   text-align: left;
   border: 1px solid #000;
+  padding-left: 10px;
 }
 .player {
   font-size: 20px;
