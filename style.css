@@ -77,10 +77,10 @@ html, body {
   margin: 20px auto 30px auto;
   text-align: left;
   border: 1px solid #000;
+  overflow-x: auto;
 }
 .blockchild {
   width: 100%;
-  overflow-x: scroll;
   border-collapse: collapse;
 }
 td, th {

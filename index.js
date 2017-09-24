@@ -38,7 +38,7 @@ function tab(e) {
 function genPlayer(type) {
   var spW, stW, enW, agW;
   if (type == undefined) {
-    type = ["qb", "wr", "te", "k", "rb", "d/st"][Math.floor(Math.random()*6)];
+    type = ["qb", "wr", "te", "k", "rb", "dst"][Math.floor(Math.random()*6)];
   }
   if (type == "qb") {
     spW = 20;
