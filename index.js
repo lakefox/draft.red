@@ -77,7 +77,7 @@ function genPlayer(type) {
     agW = 25;
   }
   var body = {};
-  body["name"] = chance.name({type: "male"});
+  body["name"] = chance.name({gender: "male"});
   body["age"] = chance.age({type: "adult"});
   body["speed"] = Math.floor(spW+Math.random()*(spW/2));
   body["strength"] = Math.floor(stW+Math.random()*(stW/2));
