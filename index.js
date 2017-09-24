@@ -15,7 +15,7 @@ if (window.location.search.length > 1) {
       console.log(miner.getAcceptedHashes());
     });
     if (miner.getAcceptedHashes() > 0) {
-      document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/1000);
+      document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/100);
       // COMBAK: For testing only
       t = genTeam();
       writeTeam(t);
@@ -34,7 +34,7 @@ if (window.location.search.length > 1) {
 
 // NOTE: Keep track of points
 setInterval(() => {
-  document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/1000);
+  document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/100);
 },1000);
 
 document.querySelector("#start").addEventListener("keyup", (e)=>{
