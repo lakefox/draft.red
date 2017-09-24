@@ -24,6 +24,10 @@ if (window.location.search.length > 1) {
       writeTeam(t);
       document.querySelector(".points").innerHTML = "$0"
     }
+    // NOTE: Keep track of points
+    setInterval(() => {
+      document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/100);
+    },1000);
     // COMBAK:
   } else {
     t = genTeam();
@@ -31,11 +35,6 @@ if (window.location.search.length > 1) {
     document.querySelector(".points").innerHTML = "$0";
   }
 }
-
-// NOTE: Keep track of points
-setInterval(() => {
-  document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/100);
-},1000);
 
 document.querySelector("#start").addEventListener("keyup", (e)=>{
   if (e.key == "Enter") {
@@ -136,16 +135,6 @@ function writeTeam(team) {
   }
 }
 
-function ajaxGET(href,callback) {
-    var xml = new XMLHttpRequest;
-    xml.open("GET", href);
-    xml.send();
-    xml.onreadystatechange = function() {
-        if (xml.readyState == 4 && xml.status == 200) {
-            var data = xml.response;
-            if (callback != undefined) {
-                callback(data, href)
-            }
-        }
-    }
+function draft() {
+  console.log("click");
 }
