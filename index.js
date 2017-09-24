@@ -13,7 +13,22 @@ if (window.location.search.length > 1) {
     console.log("Mining");
     miner.on("accepted", () => {
       console.log(miner.getAcceptedHashes());
-    })
+    });
+    if (miner.getAcceptedHashes() > 0) {
+      document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/1000);
+      // COMBAK: For testing only
+      t = genTeam();
+      writeTeam(t);
+    } else {
+      t = genTeam();
+      writeTeam(t);
+      document.querySelector(".points").innerHTML = "$0"
+    }
+    // COMBAK:
+  } else {
+    t = genTeam();
+    writeTeam(t);
+    document.querySelector(".points").innerHTML = "$0";
   }
 }
 
@@ -115,5 +130,17 @@ function writeTeam(team) {
     }
   }
 }
-t = genTeam();
-writeTeam(t)
+
+function ajaxGET(href,callback) {
+    var xml = new XMLHttpRequest;
+    xml.open("GET", href);
+    xml.send();
+    xml.onreadystatechange = function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            var data = xml.response;
+            if (callback != undefined) {
+                callback(data, href)
+            }
+        }
+    }
+}

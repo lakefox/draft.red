@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:900,400|Space+Mono:700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:900,400|Space+Mono:700|Oswald');
 html, body {
   padding: 0;
   margin: 0;
@@ -97,4 +97,9 @@ td, th {
   font-size: 100px;
   font-family: 'Space Mono', monospace;
   margin-left: 10px;
+}
+.points {
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 100px;
 }
