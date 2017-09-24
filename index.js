@@ -103,9 +103,15 @@ function genTeam() {
 
 function writeTeam(team) {
   for (var pos in team) {
-    var e = document.querySelector("#"+pos).children[1];
+    var e = document.querySelector("#"+pos).children[1].children[0];
     for (var i = 0; i < team[pos].length; i++) {
-      e.innerHTML += "<div class='player'>"+team[pos][i].name+"</div>";
+      var str = "";
+      str += "<tr><td>("+team[pos][i].position.toUpperCase()+") "+team[pos][i].name+" ("+team[pos][i].age+")</td>";
+      str += "<td>"+team[pos][i].speed+"</td>";
+      str += "<td>"+team[pos][i].strength+"</td>";
+      str += "<td>"+team[pos][i].agilty+"</td>";
+      str += "<td>"+team[pos][i].endurance+"</td></tr>";
+      e.innerHTML += str;
     }
   }
 }

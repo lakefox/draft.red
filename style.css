@@ -78,6 +78,14 @@ html, body {
   text-align: left;
   border: 1px solid #000;
 }
+.blockchild {
+  width: 100%;
+  border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #000;
+    text-align: left;
+}
 .player {
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
