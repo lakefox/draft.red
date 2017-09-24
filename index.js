@@ -115,4 +115,5 @@ function writeTeam(team) {
     }
   }
 }
-writeTeam(genTeam())
+t = genTeam();
+writeTeam(t)

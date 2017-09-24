@@ -80,6 +80,7 @@ html, body {
 }
 .blockchild {
   width: 100%;
+  overflow-x: scroll;
   border-collapse: collapse;
 }
 td, th {
