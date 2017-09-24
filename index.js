@@ -32,6 +32,11 @@ if (window.location.search.length > 1) {
   }
 }
 
+// NOTE: Keep track of points
+setInterval(() => {
+  document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/1000);
+},1000);
+
 document.querySelector("#start").addEventListener("keyup", (e)=>{
   if (e.key == "Enter") {
     var value = document.querySelector("#start").value;
