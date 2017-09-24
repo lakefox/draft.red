@@ -132,6 +132,35 @@
           <div class="button" id="startdraft" onclick="draft()">
             Start ($1000)
           </div>
+          <div style="display: none;" id="newplayer">
+            <div class="buttons">
+              <div class="button" id="sign" onclick="sign()">
+                Sign
+              </div>
+              <div class="button" id="new" onclick="draft()">
+                New ($1000)
+              </div>
+            </div>
+            <table class="blockchild">
+              <tr>
+                <th>Name/Age</th>
+                <th>Speed</th>
+                <th>Strength</th>
+                <th>Agilty</th>
+                <th>Endurance</th>
+              </tr>
+            </table>
+            <div id="kot">
+              <div style="display: inline-flex; margin-top: 20px;">
+                <div class="button" id="sign" onclick="keep()">
+                  Keep
+                </div>
+                <div class="button" id="new" onclick="train()">
+                  Train
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

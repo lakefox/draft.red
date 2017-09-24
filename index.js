@@ -136,5 +136,21 @@ function writeTeam(team) {
 }
 
 function draft() {
-  console.log("click");
+  document.querySelector("#startdraft").style.display = "none";
+  document.querySelector("#newplayer").style.display = "inherit";
+  if (document.querySelector("#newplayer").children[1].children[0].children.length > 1) {
+    document.querySelector("#newplayer").children[1].children[0].removeChild(document.querySelector("#newplayer").children[1].children[0].children[1]);
+  }
+  var p = genPlayer();
+  var str = "";
+  str += "<tr><td>("+p.position.toUpperCase()+") "+p.name+" ("+p.age+")</td>";
+  str += "<td>"+p.speed+"</td>";
+  str += "<td>"+p.strength+"</td>";
+  str += "<td>"+p.agilty+"</td>";
+  str += "<td>"+p.endurance+"</td></tr>";
+  document.querySelector("#newplayer").children[1].children[0].innerHTML += str;
+}
+
+function sign() {
+  document.querySelector(".buttons").parentElement.removeChild(document.querySelector(".buttons"));
 }
