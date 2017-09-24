@@ -103,7 +103,7 @@ function genTeam() {
 
 function writeTeam(team) {
   for (var pos in team) {
-    var e = document.querySelector("#"+pos).children[0];
+    var e = document.querySelector("#"+pos).children[1];
     for (var i = 0; i < team[pos].length; i++) {
       e.innerHTML += "<div class='player'>"+team[pos][i].name+"</div>";
     }
