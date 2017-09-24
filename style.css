@@ -73,7 +73,7 @@ html, body {
 .block {
   width: 50%;
   min-width: 300px;
-  min-height: 200px;
+  min-height: 173px;
   margin: 30px auto 30px auto;
   font-size: 100px;
   font-family: 'Space Mono', monospace;
