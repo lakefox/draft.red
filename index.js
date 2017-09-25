@@ -97,7 +97,7 @@ function genPlayer(type) {
   }
   var body = {};
   body["name"] = chance.name({gender: "male"});
-  body["age"] = chance.age({type: "adult"});
+  body["age"] = 23+Math.floor(Math.random()*15);
   body["speed"] = Math.floor(spW+Math.random()*(spW/2));
   body["strength"] = Math.floor(stW+Math.random()*(stW/2));
   body["endurance"] = Math.floor(enW+Math.random()*(enW/2));
@@ -153,4 +153,5 @@ function draft() {
 
 function sign() {
   document.querySelector(".buttons").parentElement.removeChild(document.querySelector(".buttons"));
+  document.querySelector("#kot").style.display = "inherit";
 }
