@@ -134,10 +134,10 @@
           </div>
           <div style="display: none;" id="newplayer">
             <div class="buttons">
-              <div class="button" id="sign" onclick="sign()">
+              <div class="button bl" id="sign" onclick="sign()">
                 Sign
               </div>
-              <div class="button" id="new" onclick="draft()">
+              <div class="button br" id="new" onclick="draft()">
                 New ($1000)
               </div>
             </div>
@@ -152,13 +152,32 @@
                 </tr>
               </table>
             </div>
-            <div id="kot" style="display: none;">
+            <div id="rot" style="display: none;">
               <div style="display: inline-flex; margin-top: 20px;">
-                <div class="button" id="sign" onclick="replace()" title="Replace Another Player">
+                <div class="button bl" id="replace" onclick="replace()" title="Replace Another Player">
                   Replace
                 </div>
-                <div class="button" id="new" onclick="train()" title="Train Another Player">
+                <div class="button br" id="train" onclick="train()" title="Train Another Player">
                   Train ($10000)
+                </div>
+              </div>
+              <div id="trainingArea">
+                <span style="font-family: 'Space Mono', monospace;"></span>
+                <div style="overflow-x: auto;">
+                  <table class="blockchild">
+                    <tr>
+                      <th>Speed</th>
+                      <th>Strength</th>
+                      <th>Agilty</th>
+                      <th>Endurance</th>
+                    </tr>
+                    <tr>
+                      <td>+10</td>
+                      <td>+10</td>
+                      <td>+10</td>
+                      <td>+10</td>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </div>

@@ -153,5 +153,20 @@ function draft() {
 
 function sign() {
   document.querySelector(".buttons").parentElement.removeChild(document.querySelector(".buttons"));
-  document.querySelector("#kot").style.display = "inherit";
+  document.querySelector("#rot").style.display = "inherit";
 }
+
+function train() {
+  document.querySelector("#rot").removeChild(document.querySelector("#rot").children[0]);
+  document.querySelector("#trainingArea").style.display = "inherit";
+  var count = 0;
+  var int = setInterval(() => {
+    count++
+    document.querySelector("#trainingArea").children[0].innerHTML = "Training"+"...".slice(2-count%3);
+  },300);
+  setTimeout(() => {
+    clearInterval(int);
+    document.querySelector("#trainingArea").children[0].innerHTML = "Training Complete";
+  },5000);
+}
+// NOTE: Forgot to chose the player in training but looks nice

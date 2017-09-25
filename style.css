@@ -111,7 +111,7 @@ td, th {
   font-size: 50px;
   text-align: center;
   padding-top: 10px;
-  height: 500px;
+  height: 600px;
 }
 .button {
   width: 120px;
@@ -133,9 +133,13 @@ td, th {
   display: inline-flex;
   margin-bottom: 50px;
 }
-#sign {
+.bl {
   margin-right: 10px;
 }
-#new {
+.br {
   margin-left: 10px;
+}
+#trainingArea {
+  margin-top: 50px;
+  display: none;
 }
