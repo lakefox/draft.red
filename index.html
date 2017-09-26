@@ -161,6 +161,13 @@
                   Train ($10000)
                 </div>
               </div>
+              <div id="selectPlayer">
+                Select Player <br>
+                <select id="dd"></select> <br>
+                <div class="button" id="go" onclick="startTraining()">
+                  Go
+                </div>
+              </div>
               <div id="trainingArea">
                 <span style="font-family: 'Space Mono', monospace;"></span>
                 <div style="overflow-x: auto;">
@@ -171,11 +178,7 @@
                       <th>Agilty</th>
                       <th>Endurance</th>
                     </tr>
-                    <tr>
-                      <td>+10</td>
-                      <td>+10</td>
-                      <td>+10</td>
-                      <td>+10</td>
+                    <tr id="addStats">
                     </tr>
                   </table>
                 </div>

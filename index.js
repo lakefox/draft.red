@@ -123,6 +123,11 @@ function genTeam() {
 function writeTeam(team) {
   for (var pos in team) {
     var e = document.querySelector("#"+pos).children[1].children[0];
+    if (document.querySelector("#"+pos).children[1].children[0].children.length > 1) {
+      for (var i = 1; i < document.querySelector("#"+pos).children[1].children[0].children.length; i++) {
+        document.querySelector("#"+pos).children[1].children[0].removeChild(document.querySelector("#"+pos).children[1].children[0].children[i]);
+      }
+    }
     for (var i = 0; i < team[pos].length; i++) {
       var str = "";
       str += "<tr><td>("+team[pos][i].position.toUpperCase()+") "+team[pos][i].name+" ("+team[pos][i].age+")</td>";
@@ -141,7 +146,7 @@ function draft() {
   if (document.querySelector("#newplayer").children[1].children[0].children.length > 1) {
     document.querySelector("#newplayer").children[1].children[0].removeChild(document.querySelector("#newplayer").children[1].children[0].children[1]);
   }
-  var p = genPlayer();
+  p = genPlayer();
   var str = "";
   str += "<tr><td>("+p.position.toUpperCase()+") "+p.name+" ("+p.age+")</td>";
   str += "<td>"+p.speed+"</td>";
@@ -157,16 +162,50 @@ function sign() {
 }
 
 function train() {
+  document.querySelector("#selectPlayer").style.display = "inherit";
   document.querySelector("#rot").removeChild(document.querySelector("#rot").children[0]);
+  var dd = document.querySelector("#dd");
+  for (var key in t) {
+    if (t.hasOwnProperty(key)) {
+      for (var i = 0; i < t[key].length; i++) {
+        dd.innerHTML += "<option value='"+key+"|"+i+"'>("+t[key][i].position.toUpperCase()+") "+t[key][i].name+"</option>";
+      }
+    }
+  }
+}
+
+function startTraining() {
   document.querySelector("#trainingArea").style.display = "inherit";
+  document.querySelector("#go").style.display = "none";
   var count = 0;
+  var dd = document.querySelector("#dd");
+  var c = t[dd.value.split("|")[0]][parseInt(dd.value.split("|")[1])];
+  console.log(c);
+  var addStats = document.querySelector("#addStats");
+  addStats.innerHTML += "<td>+"+Math.abs(c.speed-p.speed)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.abs(c.strength-p.strength)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.abs(c.agilty-p.agilty)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.abs(c.endurance-p.endurance)+"</td>";
   var int = setInterval(() => {
     count++
     document.querySelector("#trainingArea").children[0].innerHTML = "Training"+"...".slice(2-count%3);
   },300);
   setTimeout(() => {
     clearInterval(int);
+    c.speed += p.speed;
+    c.strength += p.strength;
+    c.agilty += p.agilty;
+    c.endurance += p.endurance;
     document.querySelector("#trainingArea").children[0].innerHTML = "Training Complete";
+    // Table
+    var table = addStats.parentElement;
+    var str = "<tr><th>Name/Age</th><th>Speed</th><th>Strength</th><th>Agilty</th><th>Endurance</th></tr>";
+    str += "<tr><td>("+c.position.toUpperCase()+") "+c.name+" ("+c.age+")</td>";
+    str += "<td>"+c.speed+"</td>";
+    str += "<td>"+c.strength+"</td>";
+    str += "<td>"+c.agilty+"</td>";
+    str += "<td>"+c.endurance+"</td></tr>";
+    table.innerHTML = str;
+    writeTeam(t);
   },5000);
 }
-// NOTE: Forgot to chose the player in training but looks nice
