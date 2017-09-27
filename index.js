@@ -232,3 +232,10 @@ function replace() {
   }
   rp2.innerHTML = "<option>("+p.position.toUpperCase()+") "+p.name+"</option>";;
 }
+
+function startReplacement() {
+  var rp1 = document.querySelector("#rp1");
+  t[rp1.value.split("|")[0]][parseInt(rp1.value.split("|")[1])] = p;
+  writeTeam(t);
+  done();
+}
