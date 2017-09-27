@@ -149,7 +149,7 @@ td, th {
   text-align: center;
   margin-top: 10px;
 }
-#dd {
+.dd {
   width: 300px;
   height: 35px;
   font-size: 20px;
@@ -162,4 +162,11 @@ td, th {
 #done {
   margin: 20px auto;
   display: none;
+}
+#replacePlayer {
+  display: none;
+  margin-top: 20px;
+}
+#replaceButton {
+  margin: 20px auto;
 }

@@ -147,6 +147,7 @@ function draft() {
   if (document.querySelector("#newplayer").children[1].children[0].children.length > 1) {
     document.querySelector("#newplayer").children[1].children[0].removeChild(document.querySelector("#newplayer").children[1].children[0].children[1]);
   }
+  // Generate player and put him in global Space
   p = genPlayer();
   var str = "";
   str += "<tr><td>("+p.position.toUpperCase()+") "+p.name+" ("+p.age+")</td>";
@@ -214,4 +215,20 @@ function startTraining() {
 var mydraft = document.querySelector("#mydraft").innerHTML;
 function done() {
   document.querySelector("#mydraft").innerHTML = mydraft;
+}
+
+function replace() {
+  document.querySelector("#replacePlayer").style.display = "inherit";
+  document.querySelector("#rot").removeChild(document.querySelector("#rot").children[0]);
+  var rp1 = document.querySelector("#rp1");
+  var rp2 = document.querySelector("#rp2");
+  for (var key in t) {
+    if (t.hasOwnProperty(key)) {
+      for (var i = 0; i < t[key].length; i++) {
+        var element = "<option value='"+key+"|"+i+"'>("+t[key][i].position.toUpperCase()+") "+t[key][i].name+"</option>";
+        rp1.innerHTML += element;
+      }
+    }
+  }
+  rp2.innerHTML = "<option>("+p.position.toUpperCase()+") "+p.name+"</option>";;
 }
