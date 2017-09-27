@@ -211,7 +211,7 @@ function startTraining() {
     writeTeam(t);
   },5000);
 }
-
+var mydraft = document.querySelector("#mydraft").innerHTML;
 function done() {
-  window.location.reload();
+  document.querySelector("#mydraft").innerHTML = mydraft;
 }
