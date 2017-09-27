@@ -45,6 +45,7 @@ document.querySelector("#start").addEventListener("keyup", (e)=>{
 
 var show = window.localStorage.page || "myteam";
 if (window.localStorage.page) {
+  console.log(show);
   document.querySelector("#myteam").style.display = "none";
   document.querySelector("#"+show).style.display = "inherit";
 }
