@@ -43,7 +43,7 @@ document.querySelector("#start").addEventListener("keyup", (e)=>{
   }
 });
 
-var show = "myteam" || window.localStorage.page;
+var show = window.localStorage.page || "myteam";
 if (window.localStorage.page) {
   document.querySelector("#myteam").style.display = "none";
   document.querySelector("#"+show).style.display = "inherit";
