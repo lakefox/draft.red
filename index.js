@@ -43,13 +43,18 @@ document.querySelector("#start").addEventListener("keyup", (e)=>{
   }
 });
 
-var show = "myteam";
+var show = "myteam" || window.localStorage.page;
+if (window.localStorage.page) {
+  document.querySelector("#myteam").style.display = "none";
+  document.querySelector("#"+show).style.display = "inherit";
+}
 function tab(e) {
   if (named) {
     if (show) {
       document.querySelector("#"+show).style.display = "none";
     }
     show = e.getAttribute("data-show");
+    window.localStorage.page = show;
     document.querySelector("#"+show).style.display = "inherit";
   }
 }
@@ -123,9 +128,10 @@ function genTeam() {
 function writeTeam(team) {
   for (var pos in team) {
     var e = document.querySelector("#"+pos).children[1].children[0];
-    if (document.querySelector("#"+pos).children[1].children[0].children.length > 1) {
-      for (var i = 1; i < document.querySelector("#"+pos).children[1].children[0].children.length; i++) {
-        document.querySelector("#"+pos).children[1].children[0].removeChild(document.querySelector("#"+pos).children[1].children[0].children[i]);
+    if (e.children.length > 1) {
+      var m = e.children.length;
+      for (var i = 1; i < m; i++) {
+        e.removeChild(e.lastChild);
       }
     }
     for (var i = 0; i < team[pos].length; i++) {
@@ -197,6 +203,7 @@ function startTraining() {
     c.agilty += p.agilty;
     c.endurance += p.endurance;
     document.querySelector("#trainingArea").children[0].innerHTML = "Training Complete";
+    document.querySelector("#done").style.display = "inherit";
     // Table
     var table = addStats.parentElement;
     var str = "<tr><th>Name/Age</th><th>Speed</th><th>Strength</th><th>Agilty</th><th>Endurance</th></tr>";
@@ -208,4 +215,8 @@ function startTraining() {
     table.innerHTML = str;
     writeTeam(t);
   },5000);
+}
+
+function done() {
+  window.location.reload();
 }
