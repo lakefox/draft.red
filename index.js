@@ -43,19 +43,13 @@ document.querySelector("#start").addEventListener("keyup", (e)=>{
   }
 });
 
-var show = window.localStorage.page || "myteam";
-if (window.localStorage.page) {
-  console.log(show);
-  document.querySelector("#myteam").style.display = "none";
-  document.querySelector("#"+show).style.display = "inherit";
-}
+var show = "myteam";
 function tab(e) {
   if (named) {
     if (show) {
       document.querySelector("#"+show).style.display = "none";
     }
     show = e.getAttribute("data-show");
-    window.localStorage.page = show;
     document.querySelector("#"+show).style.display = "inherit";
   }
 }
