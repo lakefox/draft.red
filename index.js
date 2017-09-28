@@ -184,20 +184,20 @@ function startTraining() {
   var c = t[dd.value.split("|")[0]][parseInt(dd.value.split("|")[1])];
   console.log(c);
   var addStats = document.querySelector("#addStats");
-  addStats.innerHTML += "<td>+"+Math.abs(c.speed-p.speed)+"</td>";
-  addStats.innerHTML += "<td>+"+Math.abs(c.strength-p.strength)+"</td>";
-  addStats.innerHTML += "<td>+"+Math.abs(c.agilty-p.agilty)+"</td>";
-  addStats.innerHTML += "<td>+"+Math.abs(c.endurance-p.endurance)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.min(Math.abs(c.speed-p.speed), 20)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.min(Math.abs(c.strength-p.strength), 20)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.min(Math.abs(c.agilty-p.agilty), 20)+"</td>";
+  addStats.innerHTML += "<td>+"+Math.min(Math.abs(c.endurance-p.endurance), 20)+"</td>";
   var int = setInterval(() => {
     count++
     document.querySelector("#trainingArea").children[0].innerHTML = "Training"+"...".slice(2-count%3);
   },300);
   setTimeout(() => {
     clearInterval(int);
-    c.speed += p.speed;
-    c.strength += p.strength;
-    c.agilty += p.agilty;
-    c.endurance += p.endurance;
+    c.speed += Math.min(Math.abs(c.speed-p.speed), 20);
+    c.strength += Math.min(Math.abs(c.strength-p.strength), 20);
+    c.agilty += Math.min(Math.abs(c.agilty-p.agilty), 20);
+    c.endurance += Math.min(Math.abs(c.endurance-p.endurance), 20);
     document.querySelector("#trainingArea").children[0].innerHTML = "Training Complete";
     document.querySelector("#done").style.display = "inherit";
     // Table
