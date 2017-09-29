@@ -1,3 +1,4 @@
+var leagueteams = [];
 var named = false;
 if (window.location.search.length > 1) {
   document.querySelector("#landing").style.display = "none";
@@ -28,12 +29,14 @@ if (window.location.search.length > 1) {
     setInterval(() => {
       document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/100);
     },1000);
-    // COMBAK:
   } else {
+    // COMBAK:
     t = genTeam();
     writeYourTeam(t);
     document.querySelector(".points").innerHTML = "$0";
   }
+  leagueteams.push({name: window.location.search.slice(1), team: t});
+  writeLeague();
 }
 
 document.querySelector("#start").addEventListener("keyup", (e)=>{
@@ -272,4 +275,23 @@ function avgTeam(team) {
   teamStats.endurance = Math.floor(teamStats.endurance/15);
   teamStats.agilty = Math.floor(teamStats.agilty/15);
   return teamStats;
+}
+
+function writeLeague() {
+  var str = "";
+  for (var i = 0; i < leagueteams.length; i++) {
+    var team = leagueteams[i]
+    var stats = avgTeam(team.team);
+    str += "<tr onclick='viewTeam()'><td>"+team.name+"</td>";
+    str += "<td>"+stats.age+"</td>";
+    str += "<td>"+stats.speed+"</td>";
+    str += "<td>"+stats.strength+"</td>";
+    str += "<td>"+stats.endurance+"</td>";
+    str += "<td>"+stats.agilty+"</td></tr>";
+  }
+  document.querySelector("#myleague").children[0].children[1].children[0].children[0].innerHTML += str;
+}
+
+function viewTeam() {
+  console.log("View");
 }
