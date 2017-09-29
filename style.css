@@ -170,3 +170,7 @@ td, th {
 #replaceButton {
   margin: 20px auto;
 }
+#leagueteams {
+  font-family: 'Space Mono', monospace;
+  font-size: 75px;
+}

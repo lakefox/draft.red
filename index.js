@@ -18,10 +18,10 @@ if (window.location.search.length > 1) {
       document.querySelector(".points").innerHTML = "$"+Math.floor(miner.getAcceptedHashes()/100);
       // COMBAK: For testing only
       t = genTeam();
-      writeTeam(t);
+      writeYourTeam(t);
     } else {
       t = genTeam();
-      writeTeam(t);
+      writeYourTeam(t);
       document.querySelector(".points").innerHTML = "$0"
     }
     // NOTE: Keep track of points
@@ -31,7 +31,7 @@ if (window.location.search.length > 1) {
     // COMBAK:
   } else {
     t = genTeam();
-    writeTeam(t);
+    writeYourTeam(t);
     document.querySelector(".points").innerHTML = "$0";
   }
 }
@@ -120,7 +120,7 @@ function genTeam() {
   return team;
 }
 
-function writeTeam(team) {
+function writeYourTeam(team) {
   for (var pos in team) {
     var e = document.querySelector("#"+pos).children[1].children[0];
     if (e.children.length > 1) {
@@ -139,6 +139,20 @@ function writeTeam(team) {
       e.innerHTML += str;
     }
   }
+}
+
+function writeTeam(team) {
+  var str = "";
+  for (var pos in team) {
+    for (var i = 0; i < team[pos].length; i++) {
+      str += "<tr><td>("+team[pos][i].position.toUpperCase()+") "+team[pos][i].name+" ("+team[pos][i].age+")</td>";
+      str += "<td>"+team[pos][i].speed+"</td>";
+      str += "<td>"+team[pos][i].strength+"</td>";
+      str += "<td>"+team[pos][i].agilty+"</td>";
+      str += "<td>"+team[pos][i].endurance+"</td></tr>";
+    }
+  }
+  return str;
 }
 
 function draft() {
@@ -209,7 +223,7 @@ function startTraining() {
     str += "<td>"+c.agilty+"</td>";
     str += "<td>"+c.endurance+"</td></tr>";
     table.innerHTML = str;
-    writeTeam(t);
+    writeYourTeam(t);
   },5000);
 }
 var mydraft = document.querySelector("#mydraft").innerHTML;
@@ -236,6 +250,26 @@ function replace() {
 function startReplacement() {
   var rp1 = document.querySelector("#rp1");
   t[rp1.value.split("|")[0]][parseInt(rp1.value.split("|")[1])] = p;
-  writeTeam(t);
+  writeYourTeam(t);
   done();
+}
+
+function avgTeam(team) {
+  var teamStats = {"age": 0,"speed": 0,"strength": 0,"endurance": 0,"agilty": 0};
+  for (var position in team) {
+    var player = team[position];
+    for (var i = 0; i < player.length; i++) {
+      teamStats.age += player[i].age;
+      teamStats.speed += player[i].speed;
+      teamStats.strength += player[i].strength;
+      teamStats.endurance += player[i].endurance;
+      teamStats.agilty += player[i].agilty;
+    }
+  }
+  teamStats.age = Math.floor(teamStats.age/15);
+  teamStats.speed = Math.floor(teamStats.speed/15);
+  teamStats.strength = Math.floor(teamStats.strength/15);
+  teamStats.endurance = Math.floor(teamStats.endurance/15);
+  teamStats.agilty = Math.floor(teamStats.agilty/15);
+  return teamStats;
 }
