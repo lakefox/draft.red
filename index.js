@@ -60,7 +60,7 @@ function tab(e) {
 function genPlayer(type) {
   var spW, stW, enW, agW;
   if (type == undefined) {
-    type = ["qb", "wr", "te", "k", "rb", "dst"][Math.floor(Math.random()*6)];
+    type = ["qb", "wr", "te", "k", "rb"][Math.floor(Math.random()*6)];
   }
   if (type == "qb") {
     spW = 20;
@@ -263,11 +263,11 @@ function avgTeam(team) {
       teamStats.agilty += player[i].agilty;
     }
   }
-  teamStats.age = Math.floor(teamStats.age/15);
-  teamStats.speed = Math.floor(teamStats.speed/15);
-  teamStats.strength = Math.floor(teamStats.strength/15);
-  teamStats.endurance = Math.floor(teamStats.endurance/15);
-  teamStats.agilty = Math.floor(teamStats.agilty/15);
+  teamStats.age = Math.floor(teamStats.age/14);
+  teamStats.speed = Math.floor(teamStats.speed/14);
+  teamStats.strength = Math.floor(teamStats.strength/14);
+  teamStats.endurance = Math.floor(teamStats.endurance/14);
+  teamStats.agilty = Math.floor(teamStats.agilty/14);
   return teamStats;
 }
 
@@ -276,7 +276,7 @@ function writeLeague() {
   for (var i = 0; i < leagueteams.length; i++) {
     var team = leagueteams[i]
     var stats = avgTeam(team.team);
-    str += "<tr onclick='viewTeam()'><td>"+team.name+"</td>";
+    str += "<tr onclick='viewTeam()' style='cursor: pointer;'><td>"+team.name+"</td>";
     str += "<td>"+stats.age+"</td>";
     str += "<td>"+stats.speed+"</td>";
     str += "<td>"+stats.strength+"</td>";

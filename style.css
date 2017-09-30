@@ -53,6 +53,7 @@ html, body {
   margin: 2px;
   color: #000;
   line-height: 50px;
+  cursor: pointer;
 }
 #portal {
   position: absolute;
@@ -123,6 +124,7 @@ td, th {
   font-size: 25px;
   text-align: center;
   font-family: 'Space Mono', monospace;
+  cursor: pointer;
 }
 #startdraft {
   margin: 100px auto 0px auto;
@@ -175,4 +177,11 @@ td, th {
 #leagueteams {
   font-family: 'Space Mono', monospace;
   font-size: 75px;
+}
+#edit {
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  line-height: 173px;
+  cursor: pointer;
 }
