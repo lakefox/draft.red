@@ -87,11 +87,6 @@ function genPlayer(type) {
     stW = 10;
     enW = 30;
     agW = 30;
-  } else if (type == "dst") {
-    spW = 20;
-    stW = 30;
-    enW = 20;
-    agW = 30;
   } else if (type == "flex") {
     spW = 25;
     stW = 25;
@@ -116,7 +111,6 @@ function genTeam() {
     "wr": [genPlayer("wr"),genPlayer("wr")],
     "te": [genPlayer("te")],
     "k": [genPlayer("k")],
-    "dst": [genPlayer("dst")],
     "bn": [genPlayer(),genPlayer(),genPlayer(),genPlayer(),genPlayer(),genPlayer()],
     "flex": [genPlayer("flex")]
   };
