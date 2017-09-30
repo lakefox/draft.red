@@ -23,6 +23,7 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   border: 3px solid #F00;
+  outline: none;
 }
 #logo {
   text-align: center;
