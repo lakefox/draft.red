@@ -155,7 +155,7 @@ td, th {
   margin-top: 10px;
 }
 .dd {
-  width: 300px;
+  width: 290px;
   height: 35px;
   font-size: 20px;
   font-family: 'Space Mono', monospace;
@@ -196,4 +196,8 @@ td, th {
 .with {
   height: 50px;
   line-height: 50px;
+}
+#swap {
+  margin: auto;
+  margin-bottom: 50px;
 }
