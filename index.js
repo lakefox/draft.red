@@ -289,3 +289,18 @@ function writeLeague() {
 function viewTeam() {
   console.log("View");
 }
+
+// NOTE: This add the Edit Lineup stuff so...
+
+var mp1 = document.querySelector("#mp1");
+var mp2 = document.querySelector("#mp2");
+var str = "";
+for (var key in t) {
+  if (t.hasOwnProperty(key)) {
+    for (var i = 0; i < t[key].length; i++) {
+      str += "<option value='"+key+"|"+i+"'>("+t[key][i].position.toUpperCase()+") "+t[key][i].name+"</option>";
+    }
+  }
+}
+mp1.innerHTML = str;
+mp2.innerHTML = str;

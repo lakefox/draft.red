@@ -196,6 +196,7 @@ td, th {
 .with {
   height: 50px;
   line-height: 50px;
+  font-family: 'Space Mono', monospace;
 }
 #swap {
   margin: auto;
