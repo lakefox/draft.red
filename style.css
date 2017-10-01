@@ -179,14 +179,16 @@ td, th {
   font-family: 'Space Mono', monospace;
   font-size: 75px;
 }
-#edit {
-  font-size: 50px;
+#editBlock {
+  text-align: center;
+}
+.edit {
   text-align: center;
   font-family: 'Space Mono', monospace;
-  line-height: 173px;
+  font-size: 50px;
+  margin-bottom: 20px;
 }
 .editSelection {
-  font-size: 20px;
   display: inline-grid;
   font-family: 'Raleway', sans-serif;
   margin-bottom: 50px;
