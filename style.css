@@ -81,6 +81,7 @@ html, body {
   text-align: left;
   border: 1px solid #000;
   overflow-x: auto;
+  cursor: default;
 }
 .blockchild {
   width: 100%;
@@ -183,5 +184,14 @@ td, th {
   text-align: center;
   font-family: 'Space Mono', monospace;
   line-height: 173px;
-  cursor: pointer;
+}
+.editSelection {
+  font-size: 20px;
+  display: inline-grid;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 50px;
+}
+.with {
+  height: 50px;
+  line-height: 50px;
 }
