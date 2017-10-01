@@ -288,6 +288,7 @@ function writeLeague() {
 
 function viewTeam() {
   console.log("View");
+  // TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:TODO:
 }
 
 // NOTE: This add the Edit Lineup stuff so...
@@ -304,3 +305,13 @@ for (var key in t) {
 }
 mp1.innerHTML = str;
 mp2.innerHTML = str;
+
+function swap() {
+  var mp1 = document.querySelector("#mp1");
+  var mp2 = document.querySelector("#mp2");
+  var v1 = t[mp1.value.split("|")[0]][parseInt(mp1.value.split("|")[1])];
+  var v2 = t[mp2.value.split("|")[0]][parseInt(mp2.value.split("|")[1])];
+  t[mp1.value.split("|")[0]][parseInt(mp1.value.split("|")[1])] = v2;
+  t[mp2.value.split("|")[0]][parseInt(mp2.value.split("|")[1])] = v1;
+  writeYourTeam(t);
+}
