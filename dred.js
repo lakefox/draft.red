@@ -5,10 +5,19 @@ function dred(t1, t2) {
   // 2 = offensive line
   // 3 = ball
   // player|3 = player with the ball
-  // player|03 = ball over a player
+  // player|m|b|03 = ball over a player with slope and yint
+  // 01|m|b|03 = ball over grass that belongs to defence with slope and yint
+  // if -b the x goes back +b goes forward so Math.abs() the b every time
+  // Math.min(Math.max(b,-1),1) == (-1/1)
   // Games played twice the avg stats of t1 against t2 off vis versa
   // In meters
-  this.field = _.chunk(_.fill(Array(110*49), 0), 49);
+  this.field = [];
+  for (var y = 0; y < 110; y++) {
+    this.field[y] = [];
+    for (var x = 0; x < 49; x++) {
+      this.field[y].push(0);
+    }
+  }
   var field = this.field;
   var chains = 50; // Ten meters so between 50 & 60 with 55 at 1/2
   var down = 1;
@@ -34,7 +43,7 @@ function dred(t1, t2) {
   field[45][25] = 1; // Safety 10 yards off
 
   // Place offence
-  field[56][25] = "2|3"; // center starts with the ball
+  field[56][25] = "2|0|-25|3"; // center starts with the ball 0 slope and -25 yint;
   field[56][26] = 2; // Right side line
   field[56][27] = "TE|0";
   field[56][24] = 2; // Left side line
@@ -47,76 +56,48 @@ function dred(t1, t2) {
   field[61][25] = "FLEX|0"; // a
 
   this.play = function () {
+    var players = [];
     for (var x = 0; x < field.length; x++) {
       for (var y = 0; y < field[0].length; y++) {
         var m = mS(x,y);
-        if (m.hb || m.bo || m.b || m.o) {
-          console.log(m);
+        if (m.p != "0") {
+          players.push([m,x,y]);
         }
       }
     }
+    // Sort O & D;
+    var offence;
+    var ball;
+    // [offence,defence]
+    var od = [[],[]];
+    for (var i = 0; i < players.length; i++) {
+      var p = players[i][0];
+      var index = parseInt(p.p.slice(0,1)) || Math.min(p.p.length,2);
+      od[index-1].push(players[i]);
+      if (p.hb) {
+        offence = index-1;
+        ball = i;
+      }
+    }
+    console.log(offence,od);
   }
   // meter stat
   function mS(x,y) {
-    var res = {
-      // Has Ball
-      "hb": false,
-      // Ball over
-      "bo": false,
-      // Blocked
-      "b": false,
-      // Open
-      "o": false,
-      // Position
-      "p": ""
-    };
+    //          Has Ball    Ball Over   Blocked    Position
+    var res = {"hb": false,"bo": false,"b": false,"p": ""};
     var m = field[x][y].toString();
     // Set the position
     res.p = m;
-    // Skip if grass
+    var b = parseInt(m.slice(0,1)) || Math.min(m.length,2);
     if (m != "0") {
-      var s = m.split("|");
-      if (s.length == 3) {
-        // Player has ball or it is over him
-        if (s[2] == "3") {
-          res.hb = true;
-        } else {
-          res.bo = true;
-        }
-      }
-      if (s.length == 2 && s[0] == "2") {
-        // Center or lineman has ball or it is over him
-        if (s[1] == "3") {
-          res.hb = true;
-        } else {
-          res.bo = true;
-        }
-      }
-      // Check to see if anyone is directly on him
-      for (var xO = -1; xO < 1; xO++) {
-        for (var yO = -1; yO < 1; yO++) {
-          if (field[x+xO]) {
-            if (field[x+xO][y+yO]) {
-              if (field[x+xO][y+yO] == 1) {
-                res.b = true;
-              }
-            }
-          }
-        }
-      }
-      // if blocked then not open duh
-      if (!res.b) {
-        res.o = true;
-        // Check to see if anyone is one him with in 3m
-        for (var xO = -3; xO < 3; xO++) {
-          for (var yO = -3; yO < 3; yO++) {
-            if (field[x+xO]) {
-              if (field[x+xO][y+yO]) {
-                if (field[x+xO][y+yO] == 1) {
-                  res.o = false;
-                }
-              }
-            }
+      res.hb = m.split("|").pop() == "3";
+      res.bo = m.split("|").pop() == "03";
+      for (var xO = -1; xO < 2; xO++) {
+        for (var yO = -1; yO < 2; yO++) {
+          var block = field[Math.max(x+xO, 0)][Math.max(y+yO, 0)].toString();
+          var t = parseInt(block.slice(0,1)) || Math.min(block.length,2);
+          if (t != b && block != m && block != "0") {
+            res.b = true;
           }
         }
       }
