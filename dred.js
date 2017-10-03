@@ -6,8 +6,8 @@ function dred(t1, t2) {
   // 3 = ball
   // player|3 = player with the ball
   // player|m|b|03 = ball over a player with slope and yint
-  // 01|m|b|03 = ball over grass that belongs to defence with slope and yint
-  // if -b the x goes back +b goes forward so Math.abs() the b every time
+  // 10|m|b|03 = ball over grass that belongs to defence with slope and yint
+  // if -b the x goes back +b goes forward so Math.abs() the b every time should only happen on snap
   // Math.min(Math.max(b,-1),1) == (-1/1)
   // Games played twice the avg stats of t1 against t2 off vis versa
   // In meters
@@ -43,7 +43,7 @@ function dred(t1, t2) {
   field[45][25] = 1; // Safety 10 yards off
 
   // Place offence
-  field[56][25] = "2|0|-25|3"; // center starts with the ball 0 slope and -25 yint;
+  field[56][25] = "2|0|-25"; // center starts with the ball 0 slope and -25 yint;
   field[56][26] = 2; // Right side line
   field[56][27] = "TE|0";
   field[56][24] = 2; // Left side line
@@ -54,6 +54,8 @@ function dred(t1, t2) {
   field[57][19] = "RB|0"; // B
   field[60][25] = "QB|0"; // QB
   field[61][25] = "FLEX|0"; // a
+
+  field[30][25] = "10|03"
 
   this.play = function () {
     var players = [];
@@ -74,12 +76,24 @@ function dred(t1, t2) {
       var p = players[i][0];
       var index = parseInt(p.p.slice(0,1)) || Math.min(p.p.length,2);
       od[index-1].push(players[i]);
-      if (p.hb) {
+      if (p.hb || p.bo) {
         offence = index-1;
         ball = i;
       }
     }
     console.log(offence,od);
+    var playing = true;
+    while (playing) {
+      if (players[ball][0]-10 < chains) {
+        // 1st down
+      } else if (down >= 4) {
+        // Turn over
+        playing = false;
+      } else {
+
+      }
+      playing = false;
+    }
   }
   // meter stat
   function mS(x,y) {
