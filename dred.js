@@ -90,7 +90,13 @@ function dred(t1, t2) {
         // Turn over
         playing = false;
       } else {
+        var ball = players[ball].split("|");
+        if (ball[0].p.slice(1,2) == "0" || ball[2] == "03") {
+          // The ball is over grass
 
+        } else {
+          // Someone has the ball
+        }
       }
       playing = false;
     }
