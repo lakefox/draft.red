@@ -43,7 +43,7 @@ function dred(t1, t2) {
   field[45][25] = 1; // Safety 10 yards off
 
   // Place offence
-  field[56][25] = "2|0|-25"; // center starts with the ball 0 slope and -25 yint;
+  field[56][25] = "2|0|-25|3"; // center starts with the ball 0 slope and -25 yint;
   field[56][26] = 2; // Right side line
   field[56][27] = "TE|0";
   field[56][24] = 2; // Left side line
@@ -54,8 +54,6 @@ function dred(t1, t2) {
   field[57][19] = "RB|0"; // B
   field[60][25] = "QB|0"; // QB
   field[61][25] = "FLEX|0"; // a
-
-  field[30][25] = "10|03"
 
   this.play = function () {
     var players = [];
@@ -69,7 +67,7 @@ function dred(t1, t2) {
     }
     // Sort O & D;
     var offence;
-    var ball;
+    var ballIndex;
     // [offence,defence]
     var od = [[],[]];
     for (var i = 0; i < players.length; i++) {
@@ -78,24 +76,34 @@ function dred(t1, t2) {
       od[index-1].push(players[i]);
       if (p.hb || p.bo) {
         offence = index-1;
-        ball = i;
+        ballIndex = i;
       }
     }
     console.log(offence,od);
     var playing = true;
     while (playing) {
-      if (players[ball][0]-10 < chains) {
+      if (players[ballIndex][0]-10 < chains) {
         // 1st down
       } else if (down >= 4) {
         // Turn over
         playing = false;
       } else {
-        var ball = players[ball].split("|");
-        if (ball[0].p.slice(1,2) == "0" || ball[2] == "03") {
+        var ball = players[ballIndex][0].p.split("|");
+        console.log(ball);
+        if (ball.pop() == "03") {
           // The ball is over grass
-
+          var b = ball.pop();
+          var x = (players[ballIndex][2]+Math.min(Math.max(b,-1),1));
+          var y = (x*ball.pop())+b;
+          field[y][x] = ball.join("|");
         } else {
           // Someone has the ball
+          if (ball[0] == "QB|0") {
+            // QB Needs to pass
+
+          } else {
+            // Not QB, player needs to run
+          }
         }
       }
       playing = false;
