@@ -43,7 +43,7 @@ function dred(t1, t2) {
   field[45][25] = 1; // Safety 10 yards off
 
   // Place offence
-  field[56][25] = "2|0|-25|3"; // center starts with the ball 0 slope and -25 yint;
+  field[56][25] = "2"; // center starts with the ball 0 slope and -25 yint;
   field[56][26] = 2; // Right side line
   field[56][27] = "TE|0";
   field[56][24] = 2; // Left side line
@@ -52,16 +52,20 @@ function dred(t1, t2) {
   field[56][16] = "WR|0"; // X corner
   field[57][31] = "RB|1"; // H
   field[57][19] = "RB|0"; // B
-  field[60][25] = "QB|0"; // QB
+  field[60][25] = "QB|0|0|-25|3"; // QB
   field[61][25] = "FLEX|0"; // a
 
   this.play = function () {
     var players = [];
+    var openPlayers = [];
     for (var x = 0; x < field.length; x++) {
       for (var y = 0; y < field[0].length; y++) {
         var m = mS(x,y);
         if (m.p != "0") {
           players.push([m,x,y]);
+          if (!m.b) {
+            openPlayers.push([m,x,y]);
+          }
         }
       }
     }
@@ -89,6 +93,7 @@ function dred(t1, t2) {
         playing = false;
       } else {
         var ball = players[ballIndex][0].p.split("|");
+        console.log(players[ballIndex]);
         console.log(ball);
         if (ball.pop() == "03") {
           // The ball is over grass
@@ -98,9 +103,19 @@ function dred(t1, t2) {
           field[y][x] = ball.join("|");
         } else {
           // Someone has the ball
-          if (ball[0] == "QB|0") {
+          if (ball[0] == "QB") {
             // QB Needs to pass
-
+            var q = players[ballIndex];
+            var far = 0;
+            var farPlayer;
+            for (var i = 0; i < openPlayers.length; i++) {
+              var d = Math.sqrt(Math.pow((q[1]-openPlayers[i][1]),2)+Math.pow((q[2]-openPlayers[i][2]),2));
+              if (d > far && openPlayers[i][0].p != "1") {
+                farPlayer = openPlayers[i];
+                far = d;
+              }
+            }
+            console.log(far, farPlayer);
           } else {
             // Not QB, player needs to run
           }
