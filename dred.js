@@ -43,7 +43,7 @@ function dred(t1, t2) {
   field[45][25] = 1; // Safety 10 yards off
 
   // Place offence
-  field[56][25] = "2"; // center starts with the ball 0 slope and -25 yint;
+  field[56][25] = "2|0|-25|3"; // center starts with the ball 0 slope and -25 yint;
   field[56][26] = 2; // Right side line
   field[56][27] = "TE|0";
   field[56][24] = 2; // Left side line
@@ -52,7 +52,7 @@ function dred(t1, t2) {
   field[56][16] = "WR|0"; // X corner
   field[57][31] = "RB|1"; // H
   field[57][19] = "RB|0"; // B
-  field[60][25] = "QB|0|0|-25|3"; // QB
+  field[60][25] = "QB|0"; // QB
   field[61][25] = "FLEX|0"; // a
 
   this.play = function () {
@@ -96,7 +96,7 @@ function dred(t1, t2) {
         console.log(players[ballIndex]);
         console.log(ball);
         if (ball.pop() == "03") {
-          // The ball is over grass
+          // The ball is over something
           var b = ball.pop();
           var x = (players[ballIndex][2]+Math.min(Math.max(b,-1),1));
           var y = (x*ball.pop())+b;
@@ -104,6 +104,7 @@ function dred(t1, t2) {
         } else {
           // Someone has the ball
           if (ball[0] == "QB") {
+            playing = false;
             // QB Needs to pass
             var q = players[ballIndex];
             var far = 0;
@@ -116,12 +117,13 @@ function dred(t1, t2) {
               }
             }
             console.log(far, farPlayer);
+            // Furthest player found
+            // Need to calc where the player will end up and throw it there
           } else {
             // Not QB, player needs to run
           }
         }
       }
-      playing = false;
     }
   }
   // meter stat
