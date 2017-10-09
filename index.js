@@ -5,7 +5,7 @@ if (window.location.search.length > 1) {
   document.querySelector("#start").style.display = "none";
   document.querySelector("#portal").style.display = "inherit";
   document.querySelector("#tabs").style.display = "-webkit-box";
-  document.querySelector("#name").innerHTML = window.location.search.slice(1);
+  document.querySelector("#name").innerHTML = decodeURI(window.location.search).slice(1);
   named = true;
   if (window.location.origin != "file://") {
     // Add coin hive for points
@@ -35,7 +35,7 @@ if (window.location.search.length > 1) {
     writeYourTeam(t);
     document.querySelector(".points").innerHTML = "$0";
   }
-  leagueteams.push({name: window.location.search.slice(1), team: t});
+  leagueteams.push({name: decodeURI(window.location.search).slice(1), team: t});
   writeLeague();
 }
 

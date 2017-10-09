@@ -1,171 +1,31 @@
 function dred(t1, t2) {
-  // Keys
-  // 0 = grass
-  // 1 = defensive player
-  // 2 = offensive line
-  // 3 = ball
-  // player|3 = player with the ball
-  // player|m|b|03 = ball over a player with slope and yint
-  // 10|m|b|03 = ball over grass that belongs to defence with slope and yint
-  // if -b the x goes back +b goes forward so Math.abs() the b every time should only happen on snap
-  // Math.min(Math.max(b,-1),1) == (-1/1)
-  // Games played twice the avg stats of t1 against t2 off vis versa
-  // In meters
-  this.field = [];
-  for (var y = 0; y < 110; y++) {
-    this.field[y] = [];
-    for (var x = 0; x < 49; x++) {
-      this.field[y].push(0);
-    }
-  }
-  var field = this.field;
-  var chains = 50; // Ten meters so between 50 & 60 with 55 at 1/2
+  var teams = [t1,t2];
+  var random = new alea(JSON.stringify(t1),JSON.stringify(t2));
+  var coinflip = parseInt(random()*2);
+  var off = coinflip;
+  var line = 30;
   var down = 1;
-  // t1 <= 55 centers at 25
-  //   d
-  // -----
-  //   o
-  // t2 >= 56
-  var t1D = avgTeam(t1); // 1
-  var t2D = avgTeam(t2); // 2
-  // Place defence
-  //   [ y][ x]
-  field[55][25] = 1; // center
-  field[54][25] = 1; // player behind center
-  field[55][26] = 1; // Right side line
-  field[55][27] = 1;
-  field[55][24] = 1; // Left side line
-  field[55][23] = 1;
-  field[52][35] = 1; // Right side corner 10yds from center
-  field[52][15] = 1; // Left side corner
-  field[50][30] = 1; // Right Wing
-  field[50][20] = 1; // Left Wing
-  field[45][25] = 1; // Safety 10 yards off
+  console.log(off);
+  var kicker = rate(teams[coinflip].k[0]);
+  var dist = (Math.floor((random()+kicker)*6)+1)*10; // calc kick
+  if (dist < line) {
+    // Turn over
+    off = Math.round(Math.abs(Math.min(Math.max(off,0.1),1)-1)); // Lol $) This just inverts the off
+    down += 1;
+  } else {
+    line += dist;
+  }
+  console.log(dist,off);
+  // First half
+  for (var q = 0; q < 2; q++) {
+    for (var p = 0; p < 12; p++) {
 
-  // Place offence
-  field[56][25] = "2|0|-25|3"; // center starts with the ball 0 slope and -25 yint;
-  field[56][26] = 2; // Right side line
-  field[56][27] = "TE|0";
-  field[56][24] = 2; // Left side line
-  field[56][23] = 2;
-  field[56][34] = "WR|1"; // Z 9yds from center
-  field[56][16] = "WR|0"; // X corner
-  field[57][31] = "RB|1"; // H
-  field[57][19] = "RB|0"; // B
-  field[60][25] = "QB|0"; // QB
-  field[61][25] = "FLEX|0"; // a
-
-  this.play = function () {
-    var players = [];
-    var openPlayers = [];
-    for (var x = 0; x < field.length; x++) {
-      for (var y = 0; y < field[0].length; y++) {
-        var m = mS(x,y);
-        if (m.p != "0") {
-          players.push([m,x,y]);
-          if (!m.b) {
-            openPlayers.push([m,x,y]);
-          }
-        }
-      }
-    }
-    // Sort O & D;
-    var offence;
-    var ballIndex;
-    // [offence,defence]
-    var od = [[],[]];
-    for (var i = 0; i < players.length; i++) {
-      var p = players[i][0];
-      var index = parseInt(p.p.slice(0,1)) || Math.min(p.p.length,2);
-      od[index-1].push(players[i]);
-      if (p.hb || p.bo) {
-        offence = index-1;
-        ballIndex = i;
-      }
-    }
-    console.log(offence,od);
-    var playing = true;
-    while (playing) {
-      if (players[ballIndex][0]-10 < chains) {
-        // 1st down
-      } else if (down >= 4) {
-        // Turn over
-        playing = false;
-      } else {
-        var ball = players[ballIndex][0].p.split("|");
-        console.log(players[ballIndex]);
-        console.log(ball);
-        if (ball.pop() == "03") {
-          // The ball is over something
-          var b = ball.pop();
-          var x = (players[ballIndex][2]+Math.min(Math.max(b,-1),1));
-          var y = (x*ball.pop())+b;
-          field[y][x] = ball.join("|");
-        } else {
-          // Someone has the ball
-          if (ball[0] == "QB") {
-            playing = false;
-            // QB Needs to pass
-            var q = players[ballIndex];
-            var far = 0;
-            var farPlayer;
-            for (var i = 0; i < openPlayers.length; i++) {
-              var d = Math.sqrt(Math.pow((q[1]-openPlayers[i][1]),2)+Math.pow((q[2]-openPlayers[i][2]),2));
-              if (d > far && openPlayers[i][0].p != "1") {
-                farPlayer = openPlayers[i];
-                far = d;
-              }
-            }
-            console.log(far, farPlayer);
-            // Furthest player found
-            // Need to calc where the player will end up and throw it there
-          } else {
-            // Not QB, player needs to run
-          }
-        }
-      }
     }
   }
-  // meter stat
-  function mS(x,y) {
-    //          Has Ball    Ball Over   Blocked    Position
-    var res = {"hb": false,"bo": false,"b": false,"p": ""};
-    var m = field[x][y].toString();
-    // Set the position
-    res.p = m;
-    var b = parseInt(m.slice(0,1)) || Math.min(m.length,2);
-    if (m != "0") {
-      res.hb = m.split("|").pop() == "3";
-      res.bo = m.split("|").pop() == "03";
-      for (var xO = -1; xO < 2; xO++) {
-        for (var yO = -1; yO < 2; yO++) {
-          var block = field[Math.max(x+xO, 0)][Math.max(y+yO, 0)].toString();
-          var t = parseInt(block.slice(0,1)) || Math.min(block.length,2);
-          if (t != b && block != m && block != "0") {
-            res.b = true;
-          }
-        }
-      }
-    }
-    return res;
-  }
-  function avgTeam(team) {
-    var teamStats = {"age": 0,"speed": 0,"strength": 0,"endurance": 0,"agilty": 0};
-    for (var position in team) {
-      var player = team[position];
-      for (var i = 0; i < player.length; i++) {
-        teamStats.age += player[i].age;
-        teamStats.speed += player[i].speed;
-        teamStats.strength += player[i].strength;
-        teamStats.endurance += player[i].endurance;
-        teamStats.agilty += player[i].agilty;
-      }
-    }
-    teamStats.age = Math.floor(teamStats.age/14);
-    teamStats.speed = Math.floor(teamStats.speed/14);
-    teamStats.strength = Math.floor(teamStats.strength/14);
-    teamStats.endurance = Math.floor(teamStats.endurance/14);
-    teamStats.agilty = Math.floor(teamStats.agilty/14);
-    return teamStats;
+  function rate(p) {
+    var max = Math.max(p.speed,p.strength,p.endurance,p.agilty);
+    var sum = p.speed+p.strength+p.endurance+p.agilty;
+    var base = ((((sum-max)/3)+max)*(38-p.age));
+    return parseFloat("0."+Math.floor(((((sum-max)/3)+max)/base)*100));
   }
 }
