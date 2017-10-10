@@ -2,22 +2,23 @@ function dred(t1, t2) {
   // [[offence play, defence play, line, down, off]]
   var plays = [];
   var teams = [t1,t2];
+  var scoreBoard = [0,0];
   var random = new alea(JSON.stringify(t1),JSON.stringify(t2));
   var coinflip = parseInt(random()*2);
   var off = coinflip;
-  var line = 50;
+  var line = 0;
   var down = 1;
   console.log(off);
   var kicker = rate(teams[coinflip].k[0]);
-  var dist = Math.min((Math.round((random()+kicker)*6)+1)*10, 50); // calc kick
-  if (dist < line) {
+  var dist = Math.min((Math.round((random()+kicker)*5)+1)*10, 50); // calc kick
+  if (dist < 50) {
     // Turn over
     off = Math.round(Math.abs(Math.min(Math.max(off,0.1),1)-1)); // Lol $) This just inverts the off 1=0 0=1
   } else {
     // Move the ball correctly + for t1 - for t2
-    line += (dist+10)*((off*2)-1);
+    line += dist;
   }
-  var ball = line;
+  var ball = 50+(dist*((off*2)-1));
   console.log(line,ball,off);
   // First half
   for (var q = 0; q < 2; q++) {
@@ -29,8 +30,23 @@ function dred(t1, t2) {
         var d = play(p[0],p[1],Math.floor((random()+rate(avgTeam(teams[off])))*6));
         // Move the ball correctly - for t1 + for t2
         ball += d*((off*2)-1);
+        // Move the chains
+        line += d;
         // Calc the down/turn over
+        if (line < 10) {
+          down += 1
+        } else {
+          down = 1;
+          line = 0;
+        }
+        if (ball >= 100) {
+          // Touchdown!!!
+          scoreBoard[off] += 7;
+        }
+      } else {
+        // 4th Down Turn over
       }
+      console.log(scoreBoard, down, ball, line, off);
     }
   }
   function rate(p) {
