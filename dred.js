@@ -8,45 +8,93 @@ function dred(t1, t2) {
   var off = coinflip;
   var line = 0;
   var down = 1;
+  var ball = 50;
   console.log(off);
-  var kicker = rate(teams[coinflip].k[0]);
+
+  var kicker = rate(teams[off].k[0]);
   var dist = Math.min((Math.round((random()+kicker)*5)+1)*10, 50); // calc kick
   if (dist < 50) {
     // Turn over
     off = Math.round(Math.abs(Math.min(Math.max(off,0.1),1)-1)); // Lol $) This just inverts the off 1=0 0=1
   } else {
     // Move the ball correctly + for t1 - for t2
-    line += dist;
+    ball = ((dist+30)*((off*-2)+1));
+    if (ball < 0) {
+      ball = 100+ball;
+    }
   }
-  var ball = 50+(dist*((off*2)-1));
   console.log(line,ball,off);
   // First half
-  for (var q = 0; q < 2; q++) {
-    for (var p = 0; p < 12; p++) {
-      if (down < 4) {
-        // Gen the plays for o & d
-        var p = genPlay();
-        // Calc the yardge
-        var d = play(p[0],p[1],Math.floor((random()+rate(avgTeam(teams[off])))*6));
-        // Move the ball correctly - for t1 + for t2
-        ball += d*((off*2)-1);
-        // Move the chains
-        line += d;
-        // Calc the down/turn over
-        if (line < 10) {
-          down += 1
+  half();
+  // Other team kicks
+  off = (coinflip*2)-1;
+  line = 0;
+  down = 1;
+  ball = 50;
+  console.log(off);
+
+  var kicker = rate(teams[off].k[0]);
+  var dist = Math.min((Math.round((random()+kicker)*5)+1)*10, 50); // calc kick
+  if (dist < 50) {
+    // Turn over
+    off = Math.round(Math.abs(Math.min(Math.max(off,0.1),1)-1)); // Lol $) This just inverts the off 1=0 0=1
+  } else {
+    // Move the ball correctly + for t1 - for t2
+    ball = ((dist+30)*((off*-2)+1));
+    if (ball < 0) {
+      ball = 100+ball;
+    }
+  }
+  console.log(line,ball,off);
+  // play the other half
+  half();
+  function half(){
+    for (var q = 0; q < 2; q++) {
+      for (var pc = 0; pc < 12; pc++) {
+        if (down < 4) {
+          // Gen the plays for o & d
+          var p = genPlay();
+          // Calc the yardge
+          var d = play(p[0],p[1],Math.floor((random()+rate(avgTeam(teams[off])))*6));
+          // Move the ball correctly - for t1 + for t2
+          ball += d*((off*-2)+1);
+          // Move the chains
+          line += d;
+          // Calc the down/turn over
+          if (line < 10) {
+            down += 1
+          } else {
+            down = 1;
+            line = 0;
+          }
+          if (ball >= 100 || ball <= 0) {
+            // Touchdown!!!
+            scoreBoard[off] += 7;
+            // Restart at 50
+            line = 0;
+            down = 1;
+            ball = 50;
+            // Turn over
+            var kicker = rate(teams[coinflip].k[0]);
+            dist = Math.min((Math.round((random()+kicker)*5)+1)*10, 50); // calc kick
+            if (dist < 50) {
+              // Turn over
+              off = Math.round(Math.abs(Math.min(Math.max(off,0.1),1)-1)); // Lol $) This just inverts the off 1=0 0=1
+            } else {
+              // Move the ball correctly + for t1 - for t2
+              ball = ((dist+30)*((off*-2)+1));
+              if (ball < 0) {
+                ball = 100+ball;
+              }
+            }
+          }
         } else {
+          // 4th Down Turn over
           down = 1;
-          line = 0;
+          off = Math.round(Math.abs(Math.min(Math.max(off,0.1),1)-1));
         }
-        if (ball >= 100) {
-          // Touchdown!!!
-          scoreBoard[off] += 7;
-        }
-      } else {
-        // 4th Down Turn over
+        console.log(scoreBoard, down, ball, line, off);
       }
-      console.log(scoreBoard, down, ball, line, off);
     }
   }
   function rate(p) {
@@ -56,6 +104,7 @@ function dred(t1, t2) {
     return (((sum-max)/3)+max)/base;
   }
   function play(o, d, roll) {
+    roll = Math.max(Math.min(roll,5),0);
     var points = {
       "ir": {
         "rd": [-4,-2,0,0,2,4],
@@ -86,6 +135,7 @@ function dred(t1, t2) {
     return points[o][d][roll];
   }
   function genPlay() {
+    //TODO: Generate wieghted plays for better/worst teams
     return [["ir","or","sp","mp","lp"][Math.floor(random()*5)],["rd","pd","bl"][Math.floor(random()*3)]];
   }
   function avgTeam(team) {
