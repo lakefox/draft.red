@@ -27,7 +27,7 @@ function dred(t1, t2) {
   // First half
   half();
   // Other team kicks
-  off = (coinflip*2)-1;
+  off = Math.round(Math.abs(Math.min(Math.max(coinflip,0.1),1)-1));;
   line = 0;
   down = 1;
   ball = 50;
