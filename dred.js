@@ -20,7 +20,7 @@ function dred(t1, t2) {
     // Move the ball correctly + for t1 - for t2
     ball = ((dist+30)*((off*-2)+1));
     if (ball < 0) {
-      ball = 100+ball;
+        ball = 100+ball;
     }
   }
   console.log(line,ball,off);
@@ -48,6 +48,7 @@ function dred(t1, t2) {
   console.log(line,ball,off);
   // play the other half
   half();
+
   function half(){
     for (var q = 0; q < 2; q++) {
       for (var pc = 0; pc < 12; pc++) {
@@ -136,7 +137,9 @@ function dred(t1, t2) {
   }
   function genPlay() {
     //TODO: Generate wieghted plays for better/worst teams
-    return [["ir","or","sp","mp","lp"][Math.floor(random()*5)],["rd","pd","bl"][Math.floor(random()*3)]];
+    var o = ["ir","or","sp","mp","lp"][Math.floor(random()*5)];
+    var d = ["rd","pd","bl"][Math.floor(random()*3)];
+    return [o,d];
   }
   function avgTeam(team) {
     var teamStats = {"age": 0,"speed": 0,"strength": 0,"endurance": 0,"agilty": 0};
