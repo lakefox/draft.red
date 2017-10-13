@@ -1,5 +1,5 @@
 function dred(t1, t2) {
-  // [[offence play, defence play, line, down, off]]
+  // [[offence play, defence play, line, down, off, ball]]
   var plays = [];
   var teams = [t1,t2];
   var scoreBoard = [0,0];
@@ -24,6 +24,8 @@ function dred(t1, t2) {
     }
   }
   console.log(line,ball,off);
+  plays.push(["kick off", "", line, down, coinflip, ball, scoreBoard]);
+
   // First half
   half();
   // Other team kicks
@@ -46,8 +48,11 @@ function dred(t1, t2) {
     }
   }
   console.log(line,ball,off);
+  plays.push(["kick off", "", line, down, off, ball, scoreBoard]);
   // play the other half
   half();
+  // Return the play summary
+  return plays;
 
   function half(){
     for (var q = 0; q < 2; q++) {
@@ -75,7 +80,7 @@ function dred(t1, t2) {
             line = 0;
             down = 1;
             ball = 50;
-            // Turn over
+            // Turn over kick
             var kicker = rate(teams[coinflip].k[0]);
             dist = Math.min((Math.round((random()+kicker)*5)+1)*10, 50); // calc kick
             if (dist < 50) {
@@ -88,7 +93,9 @@ function dred(t1, t2) {
                 ball = 100+ball;
               }
             }
+          plays.push(["kick off", "", line, down, off, ball, scoreBoard]);
           }
+          plays.push([p[0], p[1], line, down, off, ball, scoreBoard]);
         } else {
           // 4th Down Turn over
           down = 1;
