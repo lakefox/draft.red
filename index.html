@@ -2,229 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Draft.red</title>
+    <title>DRAFT.RED</title>
     <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <script type="text/javascript">
-      if (window.location.hash == "") window.location.hash = "#"+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10);
-    </script>
   </head>
   <body>
-    <div id="landing">
-      <div id="logo">
-        DRAFT<wbr>.<span style="color: #F00;">RED</span>
+    <img src="./assets/bg.jpg" id="bg">
+    <div class="page top">
+      <span style="opacity: 0.3;">DRAFT<wbr>.<span style="color: #F00;">&nbsp;RED</span></span>
+    </div>
+    <div class="page ep">
+      <div class="series">
+        NoSleep
+      </div>
+      <div class="body">
+        test
       </div>
     </div>
-    <input type="text" id="start" class="tab" placeholder="Team Name" spellcheck="false">
-    <div id="tabs">
-      <div id="name" class="tab" data-show="myteam" onclick="tab(this)"></div>
-      <div id="league" class="tab" data-show="myleague" onclick="tab(this)">My League</div>
-      <div id="draft" class="tab" data-show="mydraft" onclick="tab(this)">Draft Players</div>
-    </div>
-    <div id="portal">
-      <div id="myteam" class="screen" style="display: inherit;">
-                          <div class="block" title="Quarter Back" id="qb">
-                            <span class="position">QB</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" title="Wide Receiver" id="wr">
-                            <span class="position">WR</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" title="Tight End" id="te">
-                            <span class="position">TE</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" title="Bench" id="bn">
-                            <span class="position">BN</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" title="Kicker" id="k">
-                            <span class="position">K</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" title="Running Back" id="rb">
-                            <span class="position">RB</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" title="Flex Player" id="flex">
-                            <span class="position">FLEX</span>
-                            <table class="blockchild">
-                              <tr>
-                                <th>Name/Age</th>
-                                <th>Speed</th>
-                                <th>Strength</th>
-                                <th>Agilty</th>
-                                <th>Endurance</th>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="block" id="editBlock">
-                            <div class="edit">
-                              Edit Lineup
-                            </div>
-                            <div class="with" style="font-size: 30px;">
-                              Replace
-                            </div>
-                            <div class="editSelection">
-                              <select id="mp1" class="dd"></select>
-                              <div class="with">
-                                with
-                              </div>
-                              <select id="mp2" class="dd"></select>
-                            </div>
-                            <div class="button" id="swap" onclick="swap()" title="Swap a Player">
-                              Swap
-                            </div>
-                          </div>
+    <div class="page ep">
+      <div class="series">
+        Infection
       </div>
-      <div id="myleague" class="screen">
-                          <div class="block">
-                            <div id="leagueteams">
-                              League Teams
-                            </div>
-                            <div style="overflow-x: auto;">
-                              <table class="blockchild">
-                                <tr>
-                                  <th>Team Avgs</th>
-                                  <th>Age</th>
-                                  <th>Speed</th>
-                                  <th>Strength</th>
-                                  <th>Agilty</th>
-                                  <th>Endurance</th>
-                                </tr>
-                              </table>
-                            </div>
-                          </div>
-      </div>
-      <div id="mydraft" class="screen">
-                          <div class="points">
-
-                          </div>
-                          <div class="block" id="draftap">
-                            Draft A New Player
-                            <div class="button" id="startdraft" onclick="draft()">
-                              Start ($1000)
-                            </div>
-                            <div id="newplayer">
-                              <div class="buttons">
-                                <div class="button bl" id="sign" onclick="sign()">
-                                  Sign
-                                </div>
-                                <div class="button br" id="new" onclick="draft()">
-                                  New ($1000)
-                                </div>
-                              </div>
-                              <div style="overflow-x: auto;">
-                                <table class="blockchild">
-                                  <tr>
-                                    <th>Name/Age</th>
-                                    <th>Speed</th>
-                                    <th>Strength</th>
-                                    <th>Agilty</th>
-                                    <th>Endurance</th>
-                                  </tr>
-                                </table>
-                              </div>
-                              <div id="rot" style="display: none;">
-                                <div style="display: inline-flex; margin-top: 20px;">
-                                  <div class="button bl" id="replace" onclick="replace()" title="Replace Another Player">
-                                    Replace
-                                  </div>
-                                  <div class="button br" id="train" onclick="train()" title="Train Another Player">
-                                    Train ($10000)
-                                  </div>
-                                </div>
-                                <div id="replacePlayer">
-                                  <select id="rp1" class="dd"></select> <br> <br>
-                                  with <br> <br>
-                                  <select id="rp2" class="dd"></select> <br>
-                                  <div class="button" id="replaceButton" onclick="startReplacement()">
-                                    Replace
-                                  </div>
-                                </div>
-                                <div id="selectPlayer">
-                                  Select Player <br>
-                                  <select id="dd" class="dd"></select> <br>
-                                  <div class="button" id="go" onclick="startTraining()">
-                                    Go
-                                  </div>
-                                </div>
-                                <div id="trainingArea">
-                                  <span style="font-family: 'Space Mono', monospace;"></span>
-                                  <div style="overflow-x: auto;">
-                                    <table class="blockchild">
-                                      <tr>
-                                        <th>Speed</th>
-                                        <th>Strength</th>
-                                        <th>Agilty</th>
-                                        <th>Endurance</th>
-                                      </tr>
-                                      <tr id="addStats">
-                                      </tr>
-                                    </table>
-                                  </div>
-                                  <div id="done" class="button" onclick="done()">
-                                    Done
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+      <div class="body">
+        test
       </div>
     </div>
-    <script src="https://cdn.rawgit.com/chancejs/chancejs/b1b61100/chance.js" charset="utf-8"></script>
-    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.3/lib/alea.min.js" charset="utf-8"></script>
-    <script src="./dred.js" charset="utf-8"></script>
-    <script src="./index.js" charset="utf-8"></script>
   </body>
 </html>
