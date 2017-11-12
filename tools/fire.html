@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fire</title>
+  </head>
+  <style media="screen">
+    html, body {
+      padding: 0;
+      margin: 0;
+    }
+    .speed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #eee;
+      width: 100vw;
+      height: 100vh;
+      text-align: center;
+      line-height: 100vh;
+      font-size: 50px;
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="speed">
+
+    </div>
+    <textarea id="ta" rows="8" cols="80"></textarea>
+    <button type="button" onclick="go()">Go</button>
+    <script type="text/javascript">
+      function go() {
+        var text = document.querySelector("#ta").value.replace(/\r?\n|\r/g, " ");
+        text = "5 4 3 2 1 "+text;
+        text = text.split(" ");
+        console.log(text);
+        var speed = document.querySelector(".speed");
+        speed.style.display = "inherit";
+        var i = 0;
+        var int = setInterval(() => {
+          i++;
+          speed.innerHTML = text[i]
+          if (i == text.length) {
+            clearInterval(int);
+            speed.innerHTML = "FIRE";
+          }
+        },60000/250);
+      }
+    </script>
+  </body>
+</html>
