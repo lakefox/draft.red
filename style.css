@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:900,400|Space+Mono:700|Audiowide');
+@import url('https://fonts.googleapis.com/css?family=Raleway:900,400|Space+Mono:700|Audiowide|Oswald');
 html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  scroll-snap-type: y mandatory;
 }
 #bg {
   position: fixed;
@@ -16,6 +17,7 @@ html, body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  scroll-snap-align: none start;
 }
 .top {
   font-family: 'Raleway', sans-serif;
@@ -28,12 +30,62 @@ html, body {
   padding-left: 4%;
 }
 .series {
-  text-align: center;
+  padding: 4%;
   font-size: 60px;
+  text-shadow: -8px 3px 0px #B5C2BF;
   font-family: 'Audiowide', cursive;
-  color: #6D8C8B;
-  background: #0A101E;
+  color: #fff;
 }
 .ep {
+  background: #0A101E;
+}
+.ep:nth-child(even) {
+  background: #48626E;
+}
+/*###################### Image THing ##################################*/
+.gallery {
+  width: 630px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 5px;
   background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+.gallery > div {
+  position: relative;
+  float: left;
+  padding: 5px;
+}
+
+.gallery > div > img {
+  width: 200px;
+  transition: .1s transform;
+  transform: translateZ(0); /* hack */
+}
+
+.gallery > div:hover {
+  z-index: 1;
+}
+
+.gallery > div:hover > img {
+  transform: scale(1.7,1.7);
+  transition: .3s transform;
+}
+
+.cf:before, .cf:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.cf:after {
+  clear: both;
+}
+.topText {
+  position: absolute;
+  top: 0px;
+  background: #fff;
+  padding: 3px;
+  font-family: 'Oswald', sans-serif;
 }
