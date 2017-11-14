@@ -25,5 +25,7 @@ function media(e) {
   } else if (action == "PREV" && show.previousElementSibling) {
     show.previousElementSibling.setAttribute("class", "movie show");
     show.setAttribute("class", "movie");
+  } else if (action == "PLAY") {
+    document.querySelector(".show").querySelector("a").click();
   }
 }
