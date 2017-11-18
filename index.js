@@ -17,15 +17,14 @@
 })()
 function media(e) {
   var action = e.innerHTML.trim();
-  var movies = document.querySelector(".movies");
-  var show = document.querySelector(".show");
+  var show = e.parentElement.previousElementSibling.querySelector(".show");
   if (action == "NEXT" && show.nextElementSibling) {
-    show.nextElementSibling.setAttribute("class", "movie show");
-    show.setAttribute("class", "movie");
+    show.nextElementSibling.setAttribute("class", "image show");
+    show.setAttribute("class", "image");
   } else if (action == "PREV" && show.previousElementSibling) {
-    show.previousElementSibling.setAttribute("class", "movie show");
-    show.setAttribute("class", "movie");
-  } else if (action == "PLAY") {
-    document.querySelector(".show").querySelector("a").click();
+    show.previousElementSibling.setAttribute("class", "image show");
+    show.setAttribute("class", "image");
+  } else if (action == "VIEW") {
+    e.parentElement.previousElementSibling.querySelector(".show").querySelector("a").click();
   }
 }
